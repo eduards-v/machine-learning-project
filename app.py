@@ -1,5 +1,5 @@
 import os
-from flask import Flask, request, redirect, url_for, render_template, flash
+from flask import Flask, request, redirect, url_for, render_template, flash, send_from_directory
 from werkzeug.utils import secure_filename
 
 # Need to move away to config file
@@ -33,6 +33,6 @@ def upload_file():
             return redirect(url_for('uploaded_file', filename=filename))
     return render_template("index.html")
 
-@app.route('/uploaded_file')
-def uploaded_file():
-    return 'Thank You for uploading'
+@app.route('/uploaded_file/<filename>')
+def uploaded_file(filename):
+    return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
