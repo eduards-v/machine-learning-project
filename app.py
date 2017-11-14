@@ -2,6 +2,7 @@ import os
 from flask import Flask, request, redirect, url_for, render_template, flash, send_from_directory
 from werkzeug.utils import secure_filename
 
+
 # Need to move away to config file
 app = Flask(__name__)
 UPLOAD_FOLDER = 'C:/Users/eduar/Desktop/GMIT_YEAR_4/semester_7/emerging_technologies/machine-learning-project/static/uploads'
@@ -32,6 +33,9 @@ def upload_file():
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
             return redirect(url_for('uploaded_file', filename=filename))
     return render_template("index.html")
+
+
+
 
 @app.route('/uploaded_file/<filename>')
 def uploaded_file(filename):
