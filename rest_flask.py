@@ -1,9 +1,14 @@
 from flask import Flask, request
 from flask_restful import Resource, Api, reqparse
 import image_handler
+from flask_cors import CORS, cross_origin
 
 app = Flask(__name__)
 api = Api(app)
+
+# adopted from https://pypi.python.org/pypi/Flask-Cors
+# Initializes Cross Origin Resource sharing for the application.
+cors = CORS(app, resources={r"/*": {"origins": "*"}})
 
 # Restful Flask docs: https://flask-restful.readthedocs.io/en/latest/quickstart.html#resourceful-routing
 parser = reqparse.RequestParser()
@@ -22,6 +27,8 @@ class UploadImage(Resource):
         # implemented as Python dictionaries i.e., 'key': 'value' pair. 
         # Use pop method with a key as argument to obtain value.
         # Method will return KeyError if supplied key is not added to parser arguments
+
+        #print("THIS IS TEST ON ARGUMENTS ",str(args.pop('filename')), '@@@@@@@@@@@@@@@@@@@')
 
         # have to encode string into bytes that represent image
         image_handler.save_img_from_json(args.pop('image'), args.pop('filename'))
