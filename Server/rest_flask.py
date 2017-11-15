@@ -16,7 +16,7 @@ parser.add_argument('filename')
 parser.add_argument('image')
 
 
-# Define REST resources methods
+# Define REST resources 
 
 class UploadImage(Resource):
     def post(self):
