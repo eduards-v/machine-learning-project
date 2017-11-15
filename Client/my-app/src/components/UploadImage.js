@@ -25,6 +25,27 @@ class UploadImage extends Component{
         this.setState({ hello: newMessage.target.value});
     }
 
+    /* I am using react-file-base64 component to    
+       prepare file for dispatch to a service in
+       string format. 
+       Plugin can be found here: https://www.npmjs.com/package/react-file-base64
+
+       FileBase64 component onDone property (which we use in JSX at render time) 
+       return a list of objects called fileInfo, each is composed of data 
+       about an image and image itself.
+
+       fileInfo object arguments:
+            * name   * base64
+            * type   * file
+            * size
+
+        Adopted from: https://stackoverflow.com/questions/40950546/react-js-right-way-to-iterate-over-object-instead-of-object-entries
+        From docs: 
+            keys() - Returns the names of the enumerable properties and methods of an object.
+            map() - Calls a defined callback function on each element of an array,
+                    and returns an array that contains the results.
+
+    */
     handleFile = (file) => {
         Object.keys(file).map((key, index) =>
         {
@@ -33,10 +54,18 @@ class UploadImage extends Component{
             }
             if(key === 'base64'){
 
-                this.setState({ base64_image: file[key] });
+                let strippedBase64_image = file[key]
+                strippedBase64_image = strippedBase64_image.replace('data:image/png;base64,', String.prototype)
+                this.setState({ base64_image: strippedBase64_image });
             }
         })
     }
+
+    /* Method to Submit button event. 
+      Our goal is to send image from form to a service.
+      We are using ES6 function fetch() to make AJAX call.
+      You can build request step by step using it. 
+    */
 
     handleSubmit = (event) => {
                 fetch('http://127.0.0.1:5000/upload_image', {
@@ -48,13 +77,24 @@ class UploadImage extends Component{
                     },
                     body: JSON.stringify({
                         filename: this.state.filename, 
-                        image: this.state.base64_image.replace('data:image/jpeg;base64,', String.prototype)
+                        image: this.state.base64_image
                     })
                 })
                 event.preventDefault();
             }
 
-
+    /* Method to return content of this component
+       We have to return JSX syntactical code. 
+       Some components rendered in this method are from react-bootstrap library i.e., 
+            * Grid
+            * Row 
+            * Col
+       We've imported this components on top of the file.
+       It is possible to decorate components with parameters, just like in normal xml
+       although sometimes we have to follow specific JSX parameter naming convensions
+       i.e., className instead of class and so on...
+       If you like, you can use normal html DOM syntaxis to define components.
+    */
     render(){
         return(
 
@@ -76,7 +116,7 @@ class UploadImage extends Component{
                             <Button bsStyle = 'danger' type = "submit" >Send image</Button>
                         </Form>
 
-                       <textarea value = {this.state.filename} />
+                       <textarea value = {this.state.base64_image} />
                     </Col>
                 </Row>
 
@@ -85,4 +125,5 @@ class UploadImage extends Component{
     }
 }
 
+// You have to export component in order to use it in other component
 export default UploadImage;

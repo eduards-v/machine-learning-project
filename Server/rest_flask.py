@@ -28,8 +28,9 @@ class UploadImage(Resource):
         # Use pop method with a key as argument to obtain value.
         # Method will return KeyError if supplied key is not added to parser arguments
 
-        #print("THIS IS TEST ON ARGUMENTS ",str(args.pop('filename')), '@@@@@@@@@@@@@@@@@@@')
+        print("THIS IS TEST ON ARGUMENTS ",str(args['image']), '@@@@@@@@@@@@@@@@@@@')
 
+        
         # have to encode string into bytes that represent image
         image_handler.save_img_from_json(args.pop('image'), args.pop('filename'))
 

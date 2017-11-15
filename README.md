@@ -53,6 +53,6 @@ For more details, check official [tutorial](https://reactjs.org/tutorial/tutoria
 
 ### Bootstrap
 
-[Bootstraping React App](https://reactstrap.github.io/)
+[Bootstraping React App](https://react-bootstrap.github.io/getting-started.html)
 
 [Spacing Utility classes](https://v4-alpha.getbootstrap.com/utilities/spacing/)
