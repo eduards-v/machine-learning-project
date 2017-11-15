@@ -34,3 +34,25 @@ What is Tensorflow used for in this project?
 
 https://www.tensorflow.org/
 
+
+## ReactJS Client
+
+### Quick Start with React
+
+Start off by installing *create-react-app* module 
+
+`npm install -g create-react-app`
+
+Run this module to install default application build
+
+`create-react-app my-app`
+
+After installation finishes, follow instructions on the console.
+
+For more details, check official [tutorial](https://reactjs.org/tutorial/tutorial.html)
+
+### Bootstrap
+
+[Bootstraping React App](https://reactstrap.github.io/)
+
+[Spacing Utility classes](https://v4-alpha.getbootstrap.com/utilities/spacing/)
