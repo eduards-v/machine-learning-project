@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
+import { findDOMNode } from 'react-dom';
+
 import FileBase64 from 'react-file-base64';
 
 import './UploadImage.css';
 import { Button, Grid, Row, Col, Form} from 'react-bootstrap';
+import CanvasComponent from './CanvasComponent';
 
 class UploadImage extends Component{
 
@@ -18,7 +21,9 @@ class UploadImage extends Component{
         
         this.handleFile = this.handleFile.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleCanvasResult = this.handleCanvasResult.bind(this)
     }
+
 
     /* I am using react-file-base64 component to    
        prepare file for dispatch to a service in
@@ -95,29 +100,37 @@ class UploadImage extends Component{
        i.e., className instead of class and so on...
        If you like, you can use normal html DOM syntaxis to define components.
     */
+
+    handleCanvasResult(param){
+        this.setState({
+            result: param
+        });
+    }
     render(){
 
 
         return(
 
             <Grid className = 'body-style justify-content-center'>
+                <Col className = 'mr-5 ml-5'>
+                    <Row className = 'mt-5 mb-5 justify-content-center'>
+                        <Col className = 'mr-5 ml-5'>
+                            <Form inline onSubmit = {this.handleSubmit} >             
+                                <FileBase64 onDone = {this.handleFile.bind(this)}/>
+                                <Button bsStyle = 'danger' type = "submit" >Send image</Button>
+                            </Form>
 
-                <Row className = 'mt-5 mb-5 justify-content-center'>
-                    <Col className = 'mr-5 ml-5'>
-                        <Form inline onSubmit = {this.handleSubmit} >             
-                            <FileBase64 onDone = {this.handleFile.bind(this)}/>
-                            <Button bsStyle = 'danger' type = "submit" >Send image</Button>
-                        </Form>
-
-                       {/* <textarea value = {this.state.base64_image} /> */}
-                    </Col>
-                    <Col className = 'mr-5 ml-5'>
-                        
-                        
-                        <h1>{this.state.result}</h1>
-                        
-                    </Col>
-                </Row>
+                        {/* <textarea value = {this.state.base64_image} /> */}
+                        </Col>
+                    </Row>
+                    <Row className = 'mt-5 mb-5 justify-content-center'>
+                        <CanvasComponent action = {this.handleCanvasResult}/>
+                    </Row>
+                </Col>
+                <Col className = 'mr-5 ml-5 mt-5'>
+                    <h1>Results: </h1>
+                    <h1>{this.state.result}</h1>
+                </Col>
             </Grid>
         );
     }

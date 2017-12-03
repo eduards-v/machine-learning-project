@@ -4,6 +4,7 @@ import './App.css';
 
 import UploadImage from './components/UploadImage';
 
+
 class App extends Component {
   render() {
     return (
@@ -13,7 +14,10 @@ class App extends Component {
           <h1 className="App-title">Welcome to React Client</h1>
         </header>
         
+        
         <UploadImage/>
+
+        
         
       </div>
     );
