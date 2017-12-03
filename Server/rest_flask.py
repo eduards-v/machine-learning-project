@@ -3,6 +3,7 @@ from flask_restful import Resource, Api, reqparse
 import image_handler
 from flask_cors import CORS, cross_origin
 
+
 app = Flask(__name__)
 api = Api(app)
 
@@ -28,13 +29,14 @@ class UploadImage(Resource):
         # Use pop method with a key as argument to obtain value.
         # Method will return KeyError if supplied key is not added to parser arguments
 
-        print("THIS IS TEST ON ARGUMENTS ",str(args['image']), '@@@@@@@@@@@@@@@@@@@')
+        # print("THIS IS TEST ON ARGUMENTS ",str(args['image']), '@@@@@@@@@@@@@@@@@@@')
 
-        
         # have to encode string into bytes that represent image
-        image_handler.save_img_from_json(args.pop('image'), args.pop('filename'))
+        result = image_handler.save_img_from_json(args.pop('image'), args.pop('filename'))
 
-        return {'message': 'OK'}
+        # Do image test here and return digit prediction
+
+        return {'message': result}
 
 class GetImage(Resource):
     def get(self, img_name):
@@ -43,3 +45,6 @@ class GetImage(Resource):
 # add URLs for defined REST resource method
 api.add_resource(GetImage, '/uploaded_image/<string:img_name>')
 api.add_resource(UploadImage, '/upload_image')
+
+if __name__ == '__main__':
+    app.run()
