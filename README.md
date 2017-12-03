@@ -28,6 +28,10 @@ defined as a classes that contain HTTP methods get, post, put, delete, etc.
 
 https://flask-restful.readthedocs.io/en/latest/quickstart.html
 
+###How to run Flask app on Windows
+```set FLASK_APP=main.py
+flask run```
+
 ## Tensorflow 
 
 What is Tensorflow used for in this project?

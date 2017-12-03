@@ -11,18 +11,13 @@ class UploadImage extends Component{
 
         // component state can be stored here
         this.state = {
-            hello: 'Hello, World!',
             filename: '',
-            base64_image: ''
+            base64_image: '',
+            result: ''
         }
-
-        this.updateHello = this.updateHello.bind(this);
+        
         this.handleFile = this.handleFile.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
-    }
-
-    updateHello(newMessage){
-        this.setState({ hello: newMessage.target.value});
     }
 
     /* I am using react-file-base64 component to    
@@ -79,7 +74,12 @@ class UploadImage extends Component{
                         filename: this.state.filename, 
                         image: this.state.base64_image
                     })
-                })
+                }).then( (response) => {
+                    return response.json();
+                }).then( (json) =>{
+                    console.log(json)
+                    this.setState({result: json.message});
+                });
                 event.preventDefault();
             }
 
@@ -96,30 +96,28 @@ class UploadImage extends Component{
        If you like, you can use normal html DOM syntaxis to define components.
     */
     render(){
+
+
         return(
 
-            <Grid className = 'p-4 ml-5 mr-5 body-style' >
-                <Row className = 'justify-content-center'>
-                    <Col>
-                        <input type = "text" value = {this.state.hello} 
-                               onChange = {this.updateHello}/>
+            <Grid className = 'body-style justify-content-center'>
 
-                        <p>{this.state.hello}</p>
-                    </Col>
-                    
-                </Row>
-
-                <Row className = 'justify-content-center'>
-                    <Col>
+                <Row className = 'mt-5 mb-5 justify-content-center'>
+                    <Col className = 'mr-5 ml-5'>
                         <Form inline onSubmit = {this.handleSubmit} >             
                             <FileBase64 onDone = {this.handleFile.bind(this)}/>
                             <Button bsStyle = 'danger' type = "submit" >Send image</Button>
                         </Form>
 
-                       <textarea value = {this.state.base64_image} />
+                       {/* <textarea value = {this.state.base64_image} /> */}
+                    </Col>
+                    <Col className = 'mr-5 ml-5'>
+                        
+                        
+                        <h1>{this.state.result}</h1>
+                        
                     </Col>
                 </Row>
-
             </Grid>
         );
     }
