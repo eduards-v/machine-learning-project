@@ -10,7 +10,7 @@ class CanvasComponent extends Component{
         
         this.state = {
             brushColor: '#FFFFFF',
-            lineWidth: 7,
+            lineWidth: 16,
             canvasStyle: {
               backgroundColor: '#000000',
             },

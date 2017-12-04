@@ -2,6 +2,7 @@
 import data_handler, model_builder, model_trainer, model_tester
 import keras.models as models
 
+# set for initial training 
 x_train, y_train, x_test, y_test = data_handler.mnist_set_v1()
 
 # print(x_train.shape)
@@ -19,7 +20,9 @@ def first_run():
 
 #first_run()
 
+
 def predict_digit(sample):
+    # load saved model from h5 file
     model = models.load_model("./nn_models/mnist_nn_v1.h5")
     result = model_tester.predict_digit(model, sample)
     return result[0]

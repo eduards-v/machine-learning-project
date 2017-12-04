@@ -14,7 +14,8 @@ It is a good idea to add canvas on the client side to allow user to draw and sen
 How service learn from images? 
 
 Tensorflow library is a tool to drive service learning components. Tensorflow developers implemented for us complex mathematical functions required for programs to be able to learn from data we feeding it with.
-
+To build app faster, I will use Keras library built on top of Tensorflow. It provides convenient way
+to create neural network model for training and testing image sets. 
 
 
 ## Flask Quick Start
@@ -28,9 +29,13 @@ defined as a classes that contain HTTP methods get, post, put, delete, etc.
 
 https://flask-restful.readthedocs.io/en/latest/quickstart.html
 
-###How to run Flask app on Windows
-```set FLASK_APP=main.py
-flask run```
+Extensions: 
+* flask cors - `pip3 install flask-cors` - to support cross origin requests
+
+### How to run Flask app on Windows
+
+`set FLASK_APP=main.py`
+`flask run`
 
 ## Tensorflow 
 
@@ -38,6 +43,27 @@ What is Tensorflow used for in this project?
 
 https://www.tensorflow.org/
 
+Tensorflow is a scientific library for studying data and teaching programs 
+to learn data patterns. When program is trained well enough, it can be used
+to predict data patterns that are not yet part of the training set. 
+
+It can be used to build neural network, simillar to our brain neurons wired 
+together. 
+
+### Project requirements for Tensorflow
+
+In my project, I am using Keras library that is built to use Tensorflow in
+more convenient way. It is still requires Tensorflow as a backend to run. 
+
+* Installing Tensorflow - `pip3 install tensorflow`
+* Installing Keras - `pip3 install keras`
+
+Other libraries used:
+
+* Numpy - `pip3 install numpy`
+* base64 - `pip3 install base64` - to encode and decode images to and from base64 string
+* PIL - `pip3 install image` - to support image operations like open, save, resize, etc.
+* imageio - `pip3 install imageio` - easy way to get 2d numpy array from an image
 
 ## ReactJS Client
 
@@ -60,3 +86,8 @@ For more details, check official [tutorial](https://reactjs.org/tutorial/tutoria
 [Bootstraping React App](https://react-bootstrap.github.io/getting-started.html)
 
 [Spacing Utility classes](https://v4-alpha.getbootstrap.com/utilities/spacing/)
+
+### Extra required components 
+
+* react-file-base64 - `npm install react-file-base64 -- save` - base64 component
+* react-drawable-canvas - `npm install react-drawable-canvas --save` - ready to use canvas component
